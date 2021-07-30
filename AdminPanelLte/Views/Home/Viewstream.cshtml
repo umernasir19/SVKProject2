@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MyAdmin.Models.Stream_MasterView>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Viewstream</title>
+</head>
+<body>
+    
+    <p>
+        <font color="#39cccc">
+            &nbsp;&nbsp;   @Html.ActionLink("Create New", "addstream")
+        </font>
+    </p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StreamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a href="/Home/addstream?id=@item.Stream_ID"><input type="button" class="btn btn-success" value="Edit" /></a>
+             
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

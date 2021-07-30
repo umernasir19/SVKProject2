@@ -1,0 +1,203 @@
+﻿@model MyAdmin.Models.Student_Property
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Student Registration</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/script/sweetalert.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        
+        <div class="">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Student Registration Form</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+
+                                <li class="breadcrumb-item active">
+                                    <a href="@Url.Action("SubmitLogin", "Account")">Student Login</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <!--/.col (left) -->
+                        <!-- right column -->
+                        <div class="col-md-12">
+                            <!-- general form elements disabled -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Register </h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    @using (Ajax.BeginForm("StudentRegister", new AjaxOptions() { OnSuccess = "fnSucess", OnFailure = "fnFail", HttpMethod = "POST", }))
+                                    {
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.ValueFor(model => model.Message)
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.FatherName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => model.FatherName, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.MobileNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.percentageAtHS, htmlAttributes: new { @class = "control-label col-md-6" })
+                                                    @Html.EditorFor(model => model.percentageAtHS, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.percentageAtHS, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.DHA_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => model.DHA_Id, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.DHA_Id, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Register" class="btn btn-success" />
+                                            </div>
+                                            <script>
+                                                function fnSucess(data) {
+
+                                                    swal("Successfully", "Register Successfully", "success");
+
+
+
+
+                                                }
+
+                                                function fnFail(err) {
+
+                                                    swal("Faild", "Data Not Saved", "error");
+
+                                                }
+                                            </script>
+                                        </div>
+
+                                       
+
+                                    }
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                            <!-- general form elements disabled -->
+                            <!-- /.card -->
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="">
+                <b>Version</b> 3.0.0-rc.1
+            </div>
+            <strong>Copyright &copy; 2021 <a href="#">Krosstech</a></strong> All rights
+            reserved.
+        </footer>
+
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/dist/js/demo.js"></script>
+    <script src="~/script/sweetalert.min.js"></script>
+</body>
+</html>

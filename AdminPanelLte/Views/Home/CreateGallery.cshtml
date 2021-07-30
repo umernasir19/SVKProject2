@@ -1,0 +1,77 @@
+﻿@model MyAdmin.Models.GallerydbModel
+
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    @*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
+    <script src="~/script/sweetalert.min.js"></script>
+</head>
+<div class="col col-md-10">
+
+    <div class="bg-indigo color-palette"><h3>&nbsp;Set Gallery Image</h3></div>
+</div>
+
+@using (Html.BeginForm("CreateGallery", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.HiddenFor(model => model.imgID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.imgID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.imgID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ImageTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ImageTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.ImageDesc, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.ImageDesc, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ImageDesc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="file" name="ImageFile" class="btn btn-outline-primary" />
+
+            <input type="submit" value="Create" onclick="myfunction()" class="btn btn-success float-right" />
+
+
+
+        </div>
+        @if (ViewBag.isSucess != null)
+        {
+            <script>
+                function myfunction() {
+
+                    swal("Successfully", "Image Saved", "success");
+
+
+                }
+
+            </script>
+        }
+       
+    </div>
+   
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back ", "Index")
+</div>

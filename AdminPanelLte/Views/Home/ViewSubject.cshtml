@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MyAdmin.Models.Subject_MasterView>
+
+@{
+    ViewBag.Title = "ViewSubject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    &nbsp;&nbsp; @Html.ActionLink("Create New", "addSubjectMaster")
+</p>
+<table class="table table-bordered">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsComm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdateUTC)
+        </th>
+        <th>
+           Action
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsComm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdateUTC)
+        </td>
+        <td>
+            <a href="/Home/addSubjectMaster?id=@item.Subject_ID"><input type="button" class="btn btn-success" value="Edit" /></a>
+
+        </td>
+       
+    </tr>
+}
+
+</table>

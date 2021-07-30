@@ -1,0 +1,180 @@
+﻿@model MyAdmin.Models.Application_Property
+
+@{
+    ViewBag.Title = "SubComb";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Ajax.BeginForm("SubmitApplication", new AjaxOptions() { OnSuccess = "fnSucess", OnFailure = "fnFail", HttpMethod = "POST", }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(x => x.ApplicationId)
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StreamId, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.StreamId, new SelectList(Model.streamList, "Stream_ID", "StreamName"), "Select Stream", new { @Class = "form-control font-weight-bold" })
+                        @Html.ValidationMessageFor(model => model.StreamId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstSubjectID, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.FirstSubjectID, new SelectList(Model.SubjectList, "Subject_ID", "SubjectName"), "Select First Subject", new { @Class = "form-control font-weight-bold" })
+                        @Html.ValidationMessageFor(model => model.FirstSubjectID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SecondSubjectID, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+
+                        @*@Html.DropDownListFor(model=>model.SecondChoice, "SubjectComb", (MultiSelectList)ViewBag.droplist, new { multiple = "multiple" })*@
+                        @Html.DropDownListFor(model => model.SecondSubjectID, new SelectList(Model.SubjectList, "Subject_ID", "SubjectName"), "Select Second", new { @Class = "form-control font-weight-bold" })
+                        @Html.ValidationMessageFor(model => model.SecondSubjectID, "", new { @class = "text-danger" })
+
+
+                        @*@Html.DropDownListFor(model => model.SecondChoice, new SelectList(ViewBag.droplist,  "Value", "Text"), new { multiple = "multiple" })*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CommunSubjecctId, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+
+                        @*@Html.DropDownListFor(model=>model.SecondChoice, "SubjectComb", (MultiSelectList)ViewBag.droplist, new { multiple = "multiple" })*@
+                        @Html.DropDownListFor(model => model.CommunSubjecctId, new SelectList(Model.CommunSubjectList, "Subject_ID", "SubjectName"), "Select Communicative subject", new { @Class = "form-control font-weight-bold" })
+                        @Html.ValidationMessageFor(model => model.CommunSubjecctId, "", new { @class = "text-danger" })
+
+
+                        @*@Html.DropDownListFor(model => model.SecondChoice, new SelectList(ViewBag.droplist,  "Value", "Text"), new { multiple = "multiple" })*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MarksAtHS, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+
+                        @*@Html.DropDownListFor(model=>model.SecondChoice, "SubjectComb", (MultiSelectList)ViewBag.droplist, new { multiple = "multiple" })*@
+                        @Html.EditorFor(model => model.MarksAtHS, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MarksAtHS, "", new { @class = "text-danger" })
+
+
+                        @*@Html.DropDownListFor(model => model.SecondChoice, new SelectList(ViewBag.droplist,  "Value", "Text"), new { multiple = "multiple" })*@
+                    </div>
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    var subjectlist="";
+    var communicativesiub;
+    $(document).ready(function () {
+        //alert(1);
+        
+      
+
+        //var subjectlist ;
+            //Html.Raw(Json.Encode(ViewBag.SubjectList));
+        //var communicativesiub=Html.Raw(Json.Encode(ViewBag.CommunSubjectList));
+        //console.log(communicativesiub)
+        //console.log(subjectlist)
+
+        $('#FirstSubjectID').change(function () {
+        //alert(this.value);
+       // console.log(scndoption)
+            $("#SecondSubjectID option").remove();
+            
+            for(var i=0;i<subjectlist.length;i++){
+            //console.log(scndoption[i])
+                var option = '<option value="' + subjectlist[i].Subject_ID + '">' + subjectlist[i].SubjectName + '</option>';
+            $("#SecondSubjectID").append(option);
+        }
+
+        $("#SecondSubjectID option[value='" + this.value + "']").remove();
+    })
+    })
+    //$("#selectBox option[value='option1']").remove();
+
+    $('#StreamId').change(function () {
+        var stid=this.value;
+        //alert(this.value);
+        // console.log(scndoption)
+        $("#FirstSubjectID option").remove();
+        $("#SecondSubjectID option").remove();
+
+        $.post( "/Application/GetStreamSubjects?id="+stid, function( data ) {
+           // console.log(data.firstsubject);
+            if(data.firstsubject){
+                var slopt= '<option value="0">Select First Subject</option>';
+                $("#FirstSubjectID").append(slopt);
+                for(var i=0;i<data.firstsubject.length;i++){
+                    //console.log(scndoption[i])
+                    var option = '<option value="' + data.firstsubject[i].Subject_ID + '">' + data.firstsubject[i].SubjectName + '</option>';
+                    $("#FirstSubjectID").append(option);
+                }
+            }
+            if(data.secondsubject){
+               // console.log(subjectlist)
+                subjectlist=data.secondsubject;
+                for(var i=0;i<data.secondsubject.length;i++){
+                    //console.log(scndoption[i])
+                    var option = '<option value="' + data.secondsubject[i].Subject_ID + '">' + data.secondsubject[i].SubjectName + '</option>';
+                    $("#SecondSubjectID").append(option);
+                }
+            }
+            $("#SecondSubjectID option").remove();
+        });
+
+        //for(var i=0;i<scndoption.length;i++){
+        //    //console.log(scndoption[i])
+        //    var option = '<option value="' + scndoption[i].Subject_ID + '">' + scndoption[i].SubjectName + '</option>';
+        //    $("#SecondChoice").append(option);
+        //}
+
+       // $("#SecondChoice option[value='" + this.value + "']").remove();
+    })
+
+    function fnSucess(){
+       
+           
+            swal({
+                title: "Successfully!",
+                text: "Submited!",
+                type: "success"
+            }).then(function () {
+            
+                window.location = this.location.href;
+            });
+        
+    }
+</script>

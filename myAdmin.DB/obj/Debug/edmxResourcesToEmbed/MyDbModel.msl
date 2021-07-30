@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchoolDBModelStoreContainer" CdmEntityContainer="SchoolDBEntities">
+    <EntitySetMapping Name="tblGalleries">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolDBModel.tblGallery)">
+        <MappingFragment StoreEntitySet="tblGalleries">
+          <ScalarProperty Name="imgID" ColumnName="imgID" />
+          <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+          <ScalarProperty Name="ImageDesc" ColumnName="ImageDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teacher">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolDBModel.Teacher)">
+        <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subject_Combination">
+      <EntityTypeMapping TypeName="SchoolDBModel.Subject_Combination">
+        <MappingFragment StoreEntitySet="Subject_Combination">
+          <ScalarProperty Name="StreamID" ColumnName="StreamID" />
+          <ScalarProperty Name="SecondChoice" ColumnName="SecondChoice" />
+          <ScalarProperty Name="FirstChoice" ColumnName="FirstChoice" />
+          <ScalarProperty Name="Combination_ID" ColumnName="Combination_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subject_Master">
+      <EntityTypeMapping TypeName="SchoolDBModel.Subject_Master">
+        <MappingFragment StoreEntitySet="Subject_Master">
+          <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+          <ScalarProperty Name="LastUpdateUTC" ColumnName="LastUpdateUTC" />
+          <ScalarProperty Name="IsComm" ColumnName="IsComm" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="Subject_ID" ColumnName="Subject_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Application_Master">
+      <EntityTypeMapping TypeName="SchoolDBModel.Application_Master">
+        <MappingFragment StoreEntitySet="Application_Master">
+          <ScalarProperty Name="MarksAtHS" ColumnName="MarksAtHS" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedUTC" ColumnName="LastUpdatedUTC" />
+          <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+          <ScalarProperty Name="CommunSubjecctId" ColumnName="CommunSubjecctId" />
+          <ScalarProperty Name="SecondSubjectID" ColumnName="SecondSubjectID" />
+          <ScalarProperty Name="FirstSubjectID" ColumnName="FirstSubjectID" />
+          <ScalarProperty Name="StreamId" ColumnName="StreamId" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student_Master">
+      <EntityTypeMapping TypeName="SchoolDBModel.Student_Master">
+        <MappingFragment StoreEntitySet="Student_Master">
+          <ScalarProperty Name="percentageAtHS" ColumnName="percentageAtHS" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedAtUTC" ColumnName="UpdatedAtUTC" />
+          <ScalarProperty Name="CreatedAtUTC" ColumnName="CreatedAtUTC" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="DHA_Id" ColumnName="DHA_Id" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SchoolDBModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Isadmin" ColumnName="Isadmin" />
+          <ScalarProperty Name="CreatedAtUTC" ColumnName="CreatedAtUTC" />
+          <ScalarProperty Name="U_Pwd" ColumnName="U_Pwd" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stream_Master">
+      <EntityTypeMapping TypeName="SchoolDBModel.Stream_Master">
+        <MappingFragment StoreEntitySet="Stream_Master">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StreamName" ColumnName="StreamName" />
+          <ScalarProperty Name="Stream_ID" ColumnName="Stream_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,193 @@
+﻿@model IEnumerable<MyAdmin.Models.ApplicationViewModel>
+@using AdminPanelLte.Models
+@{
+    ViewBag.Title = "ViewSubject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+  &nbsp;@{
+
+    if (Session["Student"] != null && Session["Student"].ToString() != null)
+    {
+        @Html.ActionLink("Apply for New", "Application")
+    }
+
+}
+
+ &nbsp;<table id="stdnttbl" class="table table-bordered">
+    <thead>
+    <th>
+        Student Name
+    </th>
+    <th>
+        Father Name
+    </th>
+    <th>
+        Mobile No
+    </th>
+    <th>
+        Email ID
+    </th>
+    <th>
+        % At HS
+    </th>
+    <th>
+        DHA ID
+    </th>
+
+    <th>
+        First Choice
+    </th>
+    <th>
+        Second Choice
+    </th>
+    <th>
+        Communicative Subject
+    </th>
+    <th>
+        HS Subject Marks
+    </th>
+    <th>
+        Status
+    </th>
+    <th>
+        Actions
+    </th>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.student.FirstName) @Html.DisplayFor(modelItem => item.student.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.student.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.student.MobileNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.student.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.student.percentageAtHS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.student.DHA_Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectList.SubjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.secondsubject)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommunSubjectList.SubjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HS_SubjectMarks)
+                </td>
+                <td>
+                    @{
+
+                        if (item.Status == (int)DDLLIST.Status.pending)
+                        {
+                            <p><span class='badge badge-warning'>Pending</span></p>
+                        }
+                        if (item.Status == (int)DDLLIST.Status.accepted)
+                        {
+                            <p><span class='badge badge-success'>Accepted</span></p>
+                        }
+                        if (item.Status == (int)DDLLIST.Status.rejected)
+                        {
+                            <p> <span class='badge badge-danger'>Rejected</span></p>
+                        }
+                    }
+
+                </td>
+
+
+
+                <td>
+
+                    @{
+
+                        if (Session["Student"] != null && Session["Student"].ToString() != null)
+                        {
+
+                        }
+                        else
+                        {
+
+                            <input onclick="ChangeApplicationStatus(@item.ApplicationId,@Convert.ToInt16(DDLLIST.Status.accepted))" type="button" class="btn btn-success btn-sm" value="Accept" />
+                            <input onclick="ChangeApplicationStatus(@item.ApplicationId,@Convert.ToInt16(DDLLIST.Status.rejected))" type="button" class="btn btn-danger btn-sm" value="Reject" />
+
+
+                        }
+
+                    }
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/script/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#stdnttbl').DataTable();
+    });
+
+    function ChangeApplicationStatus(appid, status) {
+        swal({
+            title: "Are you sure ??",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    //$.post("/home/deleteSubCom",data:{})
+
+                    $.post("/Application/ChangeApplicationStatus", { appid: appid, status: status }, function (data) {
+
+                        if (data.flag) {
+                            swal({
+                                title: "Successfully!",
+                                text: "Data Saved!",
+                                type: "success"
+                            }).then(function () {
+
+                                window.location = this.location.href;
+                            });
+
+                        } else {
+                            swal("Error! Failed", {
+                                icon: "danger",
+                            });
+                        }
+
+                    });
+                    //swal("Poof! Your imaginary file has been deleted!", {
+                    //    icon: "success",
+                    //});
+                    //window.location.href = href;
+                } else {
+                    //swal("Your imaginary file is safe!");
+                }
+            });
+
+    }
+</script>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="09be2b386b8f4b3a99add66a3b79713d" Name="Diagram1">
+        <EntityTypeShape EntityType="SchoolDBModel.tblGallery" Width="1.5" PointX="0.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.Teacher" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.Subject_Combination" Width="1.5" PointX="4.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.Subject_Master" Width="1.5" PointX="0.875" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolDBModel.Application_Master" Width="1.5" PointX="9.875" PointY="0.5" />
+        <EntityTypeShape EntityType="SchoolDBModel.Student_Master" Width="1.5" PointX="8.125" PointY="0.5" />
+        <EntityTypeShape EntityType="SchoolDBModel.Users" Width="1.5" PointX="6.25" PointY="0.5" />
+        <EntityTypeShape EntityType="SchoolDBModel.Stream_Master" Width="1.5" PointX="4.5" PointY="0.5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

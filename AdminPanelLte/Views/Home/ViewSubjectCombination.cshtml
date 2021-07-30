@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MyAdmin.Models.Subject_CombinationView>
+
+@{
+    ViewBag.Title = "ViewSubjectCombination";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    &nbsp;&nbsp; @Html.ActionLink("Create New", "SubComb")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.stream)
+        </th>
+        <th>
+            First Choice
+
+        </th>
+        <th>
+            Second Choice
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.stream)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subjectname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondSubject)
+            </td>
+            <td>
+
+                <input type="button" id="deletecom" onclick="DeleteSubCom(@item.FirstChoice,@item.StreamID)" class="btn btn-danger" value="Delete" />
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/script/sweetalert.min.js"></script>
+<script>
+    function DeleteSubCom(frst, strid) {
+        swal({
+            title: "Are you sure ??",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+         .then((willDelete) => {
+             if (willDelete) {
+                 //$.post("/home/deleteSubCom",data:{})
+
+                 $.post("/home/deleteSubCom", { streamid: strid, majorid: frst }, function (data) {
+                    
+                     if (data.flag) {
+                         swal("Your Combination file has been deleted!", {
+                             icon: "success",
+                         });
+                     } else {
+                         swal("Uff ! You can't Delete, because Combination Exist in Application", {
+                             icon: "info",
+                         });
+                     }
+
+                 });
+                 //swal("Poof! Your imaginary file has been deleted!", {
+                 //    icon: "success",
+                 //});
+                 //window.location.href = href;
+             } else {
+                 //swal("Your imaginary file is safe!");
+             }
+         });
+
+    }
+</script>

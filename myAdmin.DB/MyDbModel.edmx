@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchoolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Application_Master">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="StreamId" Type="int" Nullable="false" />
+          <Property Name="FirstSubjectID" Type="int" Nullable="false" />
+          <Property Name="SecondSubjectID" Type="int" Nullable="false" />
+          <Property Name="CommunSubjecctId" Type="int" />
+          <Property Name="ApplicationStatus" Type="int" Nullable="false" />
+          <Property Name="LastUpdatedUTC" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="MarksAtHS" Type="int" />
+        </EntityType>
+        <EntityType Name="Stream_Master">
+          <Key>
+            <PropertyRef Name="Stream_ID" />
+          </Key>
+          <Property Name="Stream_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StreamName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student_Master">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FatherName" Type="varchar" MaxLength="100" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="percentageAtHS" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DHA_Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAtUTC" Type="datetime" />
+          <Property Name="UpdatedAtUTC" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Subject_Combination">
+          <Key>
+            <PropertyRef Name="Combination_ID" />
+          </Key>
+          <Property Name="Combination_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstChoice" Type="int" Nullable="false" />
+          <Property Name="SecondChoice" Type="int" Nullable="false" />
+          <Property Name="StreamID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject_Master">
+          <Key>
+            <PropertyRef Name="Subject_ID" />
+          </Key>
+          <Property Name="Subject_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="IsComm" Type="bit" Nullable="false" />
+          <Property Name="LastUpdateUTC" Type="datetime" />
+          <Property Name="LastUpdateBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblGalleries">
+          <Key>
+            <PropertyRef Name="imgID" />
+          </Key>
+          <Property Name="imgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageTitle" Type="nvarchar(max)" />
+          <Property Name="ImageDesc" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Department" Type="nvarchar(max)" />
+          <Property Name="role" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="U_Pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAtUTC" Type="datetime" />
+          <Property Name="Isadmin" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="SchoolDBModelStoreContainer">
+          <EntitySet Name="Application_Master" EntityType="Self.Application_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stream_Master" EntityType="Self.Stream_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_Master" EntityType="Self.Student_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject_Combination" EntityType="Self.Subject_Combination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject_Master" EntityType="Self.Subject_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGalleries" EntityType="Self.tblGalleries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblGallery">
+          <Key>
+            <PropertyRef Name="imgID" />
+          </Key>
+          <Property Name="imgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="SchoolDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblGalleries" EntityType="Self.tblGallery" />
+          <EntitySet Name="Teacher" EntityType="SchoolDBModel.Teacher" />
+          <EntitySet Name="Subject_Combination" EntityType="SchoolDBModel.Subject_Combination" />
+          <EntitySet Name="Subject_Master" EntityType="SchoolDBModel.Subject_Master" />
+          <EntitySet Name="Application_Master" EntityType="SchoolDBModel.Application_Master" />
+          <EntitySet Name="Student_Master" EntityType="SchoolDBModel.Student_Master" />
+          <EntitySet Name="Users" EntityType="SchoolDBModel.Users" />
+          <EntitySet Name="Stream_Master" EntityType="SchoolDBModel.Stream_Master" />
+        </EntityContainer>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Subject_Combination">
+          <Key>
+            <PropertyRef Name="Combination_ID" />
+          </Key>
+          <Property Name="Combination_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstChoice" Type="Int32" Nullable="false" />
+          <Property Name="SecondChoice" Type="Int32" Nullable="false" />
+          <Property Name="StreamID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject_Master">
+          <Key>
+            <PropertyRef Name="Subject_ID" />
+          </Key>
+          <Property Name="Subject_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsComm" Type="Boolean" Nullable="false" />
+          <Property Name="LastUpdateUTC" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdateBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Application_Master">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="StreamId" Type="Int32" Nullable="false" />
+          <Property Name="FirstSubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SecondSubjectID" Type="Int32" Nullable="false" />
+          <Property Name="CommunSubjecctId" Type="Int32" />
+          <Property Name="ApplicationStatus" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdatedUTC" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="MarksAtHS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Student_Master">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DHA_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAtUTC" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAtUTC" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="FatherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="percentageAtHS" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="U_Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAtUTC" Type="DateTime" Precision="3" />
+          <Property Name="Isadmin" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Stream_Master">
+          <Key>
+            <PropertyRef Name="Stream_ID" />
+          </Key>
+          <Property Name="Stream_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StreamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchoolDBModelStoreContainer" CdmEntityContainer="SchoolDBEntities">
+    <EntitySetMapping Name="tblGalleries">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolDBModel.tblGallery)">
+        <MappingFragment StoreEntitySet="tblGalleries">
+          <ScalarProperty Name="imgID" ColumnName="imgID" />
+          <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+          <ScalarProperty Name="ImageDesc" ColumnName="ImageDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teacher">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolDBModel.Teacher)">
+        <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="Subject_Combination">
+            <EntityTypeMapping TypeName="SchoolDBModel.Subject_Combination">
+              <MappingFragment StoreEntitySet="Subject_Combination">
+                <ScalarProperty Name="StreamID" ColumnName="StreamID" />
+                <ScalarProperty Name="SecondChoice" ColumnName="SecondChoice" />
+                <ScalarProperty Name="FirstChoice" ColumnName="FirstChoice" />
+                <ScalarProperty Name="Combination_ID" ColumnName="Combination_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subject_Master">
+            <EntityTypeMapping TypeName="SchoolDBModel.Subject_Master">
+              <MappingFragment StoreEntitySet="Subject_Master">
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="LastUpdateUTC" ColumnName="LastUpdateUTC" />
+                <ScalarProperty Name="IsComm" ColumnName="IsComm" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Subject_ID" ColumnName="Subject_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application_Master">
+            <EntityTypeMapping TypeName="SchoolDBModel.Application_Master">
+              <MappingFragment StoreEntitySet="Application_Master">
+                <ScalarProperty Name="MarksAtHS" ColumnName="MarksAtHS" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedUTC" ColumnName="LastUpdatedUTC" />
+                <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+                <ScalarProperty Name="CommunSubjecctId" ColumnName="CommunSubjecctId" />
+                <ScalarProperty Name="SecondSubjectID" ColumnName="SecondSubjectID" />
+                <ScalarProperty Name="FirstSubjectID" ColumnName="FirstSubjectID" />
+                <ScalarProperty Name="StreamId" ColumnName="StreamId" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Master">
+            <EntityTypeMapping TypeName="SchoolDBModel.Student_Master">
+              <MappingFragment StoreEntitySet="Student_Master">
+                <ScalarProperty Name="percentageAtHS" ColumnName="percentageAtHS" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedAtUTC" ColumnName="UpdatedAtUTC" />
+                <ScalarProperty Name="CreatedAtUTC" ColumnName="CreatedAtUTC" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DHA_Id" ColumnName="DHA_Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SchoolDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Isadmin" ColumnName="Isadmin" />
+                <ScalarProperty Name="CreatedAtUTC" ColumnName="CreatedAtUTC" />
+                <ScalarProperty Name="U_Pwd" ColumnName="U_Pwd" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stream_Master">
+            <EntityTypeMapping TypeName="SchoolDBModel.Stream_Master">
+              <MappingFragment StoreEntitySet="Stream_Master">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StreamName" ColumnName="StreamName" />
+                <ScalarProperty Name="Stream_ID" ColumnName="Stream_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

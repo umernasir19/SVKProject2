@@ -1,0 +1,65 @@
+﻿@model MyAdmin.Models.GallerydbModel
+
+@{
+    ViewBag.Title = "viewImg";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>viewImg</h2>
+
+<div>
+    <h4>GallerydbModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imgID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imgID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageDesc)
+        </dd>
+
+    </dl>
+
+    @*@if (Model.ImageDesc.Count > 0)
+    {*@
+        <div class="row-fluid">
+            <div class="span2">
+                <div class="item">
+                    @foreach (var image in Model.ImageDesc)
+                    {
+                        <div style=" margin:10px; float:left; height:200px; overflow:hidden; width:200px;">
+                            <a id="ShowImage" class="fancybox-button" data-rel="fancybox-button"
+                               title="Photo" href="@Url.Content("~/Index/"+ image)">
+                                <div class="zoom">
+                                    <img src="@Url.Content("~/Index/" + image)" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    @*}*@
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
