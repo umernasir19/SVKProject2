@@ -4337,7 +4337,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DDLLIST.cs" />
+    <Compile Include="Utilities\Config.cs" />
+    <Compile Include="Utilities\Cookies.cs" />
+    <Compile Include="Utilities\DDLLIST.cs" />
+    <Compile Include="Utilities\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4928,6 +4931,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

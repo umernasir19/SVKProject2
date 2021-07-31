@@ -1,4 +1,5 @@
-﻿using myAdmin.DB.DbOperations;
+﻿using AdminPanelLte.Utilities;
+using myAdmin.DB.DbOperations;
 using MyAdmin.Models;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace AdminPanelLte.Controllers
                 int flag = CheckUser(objmodel);
                 if (flag==1)
                 {
+                    Cookies.WriteUserInCookie(objmodel);
                     Session["UID"] = objmodel.UserID;
                     Session["Admin"] = true;// objmodel.Sid;
                     return RedirectToAction("Index", "Home");
@@ -50,12 +52,14 @@ namespace AdminPanelLte.Controllers
                 return View("AdminLogin", objmodel);
             }
         }
-        public ActionResult Logout()
+        public ActionResult Logout(string viewname)
         {
             Session.RemoveAll();
             Session.Clear();
             Session.Abandon();
-            return View("AdminLogin");
+            Cookies.ClearCookie();
+            Cookies.ClearCookieStudent();
+            return View(viewname);
         }
         public ActionResult SubmitLogin(Login_Property objmodel)
         {
@@ -64,6 +68,7 @@ namespace AdminPanelLte.Controllers
                 var flag = CheckLogin(objmodel);
                 if (flag==1)
                 {
+                    Cookies.WriteStudentInCookie(objmodel);
                     Session["UID"] = objmodel.Sid;
                     Session["Student"] = true;// objmodel.Sid;
                     Session["SName"] = objmodel.LastName;
