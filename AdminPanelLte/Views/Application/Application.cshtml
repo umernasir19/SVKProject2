@@ -99,26 +99,37 @@
     var subjectlist="";
     var communicativesiub;
     $(document).ready(function () {
-        //alert(1);
-        
-      
-
-        //var subjectlist ;
-            //Html.Raw(Json.Encode(ViewBag.SubjectList));
-        //var communicativesiub=Html.Raw(Json.Encode(ViewBag.CommunSubjectList));
-        //console.log(communicativesiub)
-        //console.log(subjectlist)
-
+    
         $('#FirstSubjectID').change(function () {
-        //alert(this.value);
-       // console.log(scndoption)
+
             $("#SecondSubjectID option").remove();
             
-            for(var i=0;i<subjectlist.length;i++){
-            //console.log(scndoption[i])
-                var option = '<option value="' + subjectlist[i].Subject_ID + '">' + subjectlist[i].SubjectName + '</option>';
-            $("#SecondSubjectID").append(option);
-        }
+
+            //fix for second subject issue
+            var strid = $('#StreamId option:selected').val();
+            var frstid = $('#FirstSubjectID option:selected').val();
+            
+            $.post("/Application/GetSecondSubjects?strid=" + strid + "&frstid="+frstid, function (data) {
+                
+                if (data.secondsubject) {
+                    // console.log(subjectlist)
+                    subjectlist = data.secondsubject;
+                    for (var i = 0; i < data.secondsubject.length; i++) {
+                        //console.log(scndoption[i])
+                        var option = '<option value="' + data.secondsubject[i].Subject_ID + '">' + data.secondsubject[i].SubjectName + '</option>';
+                        $("#SecondSubjectID").append(option);
+                    }
+                }
+                //$("#SecondSubjectID option").remove();
+            });
+
+            // end fix
+
+        //    for(var i=0;i<subjectlist.length;i++){
+        //    //console.log(scndoption[i])
+        //        var option = '<option value="' + subjectlist[i].Subject_ID + '">' + subjectlist[i].SubjectName + '</option>';
+        //    $("#SecondSubjectID").append(option);
+        //}
 
         $("#SecondSubjectID option[value='" + this.value + "']").remove();
     })

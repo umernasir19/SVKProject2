@@ -67,6 +67,20 @@ namespace AdminPanelLte.Controllers
         }
 
 
+
+        public JsonResult GetSecondSubjects(int strid,int frstid)
+        {
+            db = new DbRepository();
+            var scndsubjectlist=db.GetSubjectCombinationdata().Where(p=>p.StreamID==strid && p.FirstChoice==frstid).Select(p => p.SecondChoice).Distinct().ToList();
+          
+           
+            
+            var scndsubject = db.GetSubject().Where(p => scndsubjectlist.Contains(p.Subject_ID)).ToList();
+
+            return Json(new {secondsubject = scndsubject }, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult ViewApplication()
         {
             db = new DbRepository();
