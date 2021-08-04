@@ -27,7 +27,7 @@ namespace AdminPanelLte.Controllers
             List<ApplicationViewModel> appmodel = repository.GetapplicationData().Where(p=>p.Status==1).ToList();
             if (Session["Student"] != null && Session["Student"].ToString() != null)
             {
-                int sid = Convert.ToInt16(Session["UID"].ToString());
+                int sid = Convert.ToInt32(Session["UID"].ToString());
                 appmodel = appmodel.Where(p => p.StudentID == sid).ToList();
             }
             var firstchoicelist = repository.GetSubjectCombination().Select(p => p.FirstChoice).ToList();

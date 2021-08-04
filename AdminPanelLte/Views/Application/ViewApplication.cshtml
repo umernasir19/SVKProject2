@@ -1,12 +1,15 @@
 ﻿@model IEnumerable<MyAdmin.Models.ApplicationViewModel>
 @using AdminPanelLte.Models
+@using AdminPanelLte.Utilities
+
 @{
     ViewBag.Title = "ViewSubject";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-  &nbsp;@{
-
-    if (Session["Student"] != null && Session["Student"].ToString() != null)
+  &nbsp;
+@{
+   
+    if (Session[Config.sessionNameForStudentdata] != null && Session[Config.sessionNameForStudentdata].ToString() != null)
     {
         @Html.ActionLink("Apply for New", "Application")
     }

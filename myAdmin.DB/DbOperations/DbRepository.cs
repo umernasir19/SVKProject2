@@ -8,9 +8,9 @@ using System.Data.Entity;
 
 namespace myAdmin.DB.DbOperations
 {
-   public  class DbRepository
+    public class DbRepository
     {
-       
+
         public int setGallery(GallerydbModel model)
         {
             using (var context = new SchoolDBEntities())
@@ -18,7 +18,7 @@ namespace myAdmin.DB.DbOperations
                 tblGallery gallery = new tblGallery()
                 {
                     ImageTitle = model.ImageTitle,
-                       ImageDesc=model.ImageDesc
+                    ImageDesc = model.ImageDesc
                 };
                 context.tblGalleries.Add(gallery);
                 context.SaveChanges();
@@ -41,19 +41,19 @@ namespace myAdmin.DB.DbOperations
                 };
 
                 context.Teacher.Add(_teacher);
-                context.SaveChanges();               
+                context.SaveChanges();
                 return _teacher.id;
             }
-            
+
         }
         public int AddUpdateStream(Stream_MasterView model)
         {
             using (var context = new SchoolDBEntities())
             {
-                
+
                 Stream_Master _stream_Master = new Stream_Master()
                 {
-                    Stream_ID=model.Stream_ID,
+                    Stream_ID = model.Stream_ID,
                     StreamName = model.StreamName,
                     IsActive = model.IsActive
                 };
@@ -63,7 +63,8 @@ namespace myAdmin.DB.DbOperations
                     context.Entry(_stream_Master).State = EntityState.Modified;
                     context.SaveChanges();
                 }
-                else {
+                else
+                {
                     context.Stream_Master.Add(_stream_Master);
                     context.SaveChanges();
                 }
@@ -78,7 +79,7 @@ namespace myAdmin.DB.DbOperations
             {
 
                 return context.Stream_Master.ToList();
-               
+
             }
 
         }
@@ -90,12 +91,12 @@ namespace myAdmin.DB.DbOperations
             {
                 Subject_Master _Subject_Master = new Subject_Master()
                 {
-                   Subject_ID=model.Subject_ID,
-                   SubjectName=model.SubjectName,
-                   isActive=model.isActive,
-                   IsComm=model.IsComm,
-                   LastUpdateUTC=System.DateTime.UtcNow,
-                   LastUpdateBy= 1
+                    Subject_ID = model.Subject_ID,
+                    SubjectName = model.SubjectName,
+                    isActive = model.isActive,
+                    IsComm = model.IsComm,
+                    LastUpdateUTC = System.DateTime.UtcNow,
+                    LastUpdateBy = 1
                 };
 
                 context.Subject_Master.Add(_Subject_Master);
@@ -124,14 +125,14 @@ namespace myAdmin.DB.DbOperations
         {
             using (var context = new SchoolDBEntities())
             {
-                Subject_Combination _SubjectComb= new Subject_Combination(); 
+                Subject_Combination _SubjectComb = new Subject_Combination();
                 for (int i = 0; i < model.SecondChoice.Count; i++)
                 {
                     _SubjectComb = new Subject_Combination()
                     {
 
                         FirstChoice = model.FirstChoice,
-                        SecondChoice=model.SecondChoice[i],
+                        SecondChoice = model.SecondChoice[i],
                         StreamID = model.StreamID
 
                     };
@@ -141,14 +142,14 @@ namespace myAdmin.DB.DbOperations
 
                 //Subject_Combination _SubjectComb = new Subject_Combination()
                 //{
-                  
+
                 //    FirstChoice=model.FirstChoice,
                 //    //SecondChoice=model.SecondChoice,
                 //    StreamID=model.StreamID
 
                 //};
 
-               
+
                 return _SubjectComb.Combination_ID;
             }
 
@@ -163,85 +164,85 @@ namespace myAdmin.DB.DbOperations
                               join str in context.Stream_Master on g.FirstOrDefault().StreamID equals str.Stream_ID
                               join sub in context.Subject_Master on g.FirstOrDefault().FirstChoice equals sub.Subject_ID
                               join secsub in context.Subject_Master on g.FirstOrDefault().SecondChoice equals secsub.Subject_ID
-                               select new Subject_CombinationView
+                              select new Subject_CombinationView
                               {
-                                  
+
                                   stream = context.Stream_Master.Where(p => p.Stream_ID == str.Stream_ID).FirstOrDefault().StreamName,
                                   subjectname = context.Subject_Master.Where(p => p.Subject_ID == sub.Subject_ID).FirstOrDefault().SubjectName,
-                                  
 
-                               }).ToList();
 
-              var R21=  context.Subject_Combination
-             .Join(
-             context.Subject_Master,
-             tCS => tCS.FirstChoice,
-             s => s.Subject_ID,
-             (tCS, s) =>
-             new
-             {
-                 tCS = tCS,
-                 s = s
-             }
-             )
-             .Join(
-             context.Stream_Master,
-             p => p.tCS.StreamID,
-             st => st.Stream_ID,
-             (p, st) =>
-             new
-             {
-                 p = p,
-                 st = st
-             }
-             )
-             .Join(
-             context.Subject_Master,
-             x => x.p.tCS.SecondChoice,
-             c => c.Subject_ID,
-             (x, c) =>
-             new
-             {
-                 x = x,
-                 c = c
-             }
-             )
-             .GroupBy(
-             y =>
-             new
-             {
-                 first = y.x.p.tCS.FirstChoice,
-                 firstsubject = y.x.p.s.SubjectName,
-                 streamid=y.x.st.Stream_ID,//.tCS.StreamID,
-                 streamname=y.x.st.StreamName
-             },
-             y => y.c.SubjectName
-             )
-             .Select(
-             g =>
-             new
-             {
-                 sirstsubid = g.Key.first,
-                 firstsub = g.Key.firstsubject,
-                 strid=g.Key.streamid,
-                 streamnam=g.Key.streamname,
+                              }).ToList();
+
+                var R21 = context.Subject_Combination
+               .Join(
+               context.Subject_Master,
+               tCS => tCS.FirstChoice,
+               s => s.Subject_ID,
+               (tCS, s) =>
+               new
+               {
+                   tCS = tCS,
+                   s = s
+               }
+               )
+               .Join(
+               context.Stream_Master,
+               p => p.tCS.StreamID,
+               st => st.Stream_ID,
+               (p, st) =>
+               new
+               {
+                   p = p,
+                   st = st
+               }
+               )
+               .Join(
+               context.Subject_Master,
+               x => x.p.tCS.SecondChoice,
+               c => c.Subject_ID,
+               (x, c) =>
+               new
+               {
+                   x = x,
+                   c = c
+               }
+               )
+               .GroupBy(
+               y =>
+               new
+               {
+                   first = y.x.p.tCS.FirstChoice,
+                   firstsubject = y.x.p.s.SubjectName,
+                   streamid = y.x.st.Stream_ID,//.tCS.StreamID,
+                 streamname = y.x.st.StreamName
+               },
+               y => y.c.SubjectName
+               )
+               .Select(
+               g =>
+               new
+               {
+                   sirstsubid = g.Key.first,
+                   firstsub = g.Key.firstsubject,
+                   strid = g.Key.streamid,
+                   streamnam = g.Key.streamname,
                  //FatherName = g.Key.FatherName,
                  //Address = g.Key.Address,
                  //ContactNo = g.Key.MobileNo,
                  courseName = g.Select(e => e).Distinct()
-             }
-             ).ToList().Select(l =>
-             new Subject_CombinationView()
-             {
-                 FirstChoice = l.sirstsubid,
-                 subjectname = l.firstsub,
-                 StreamID=l.strid,
+               }
+               ).ToList().Select(l =>
+               new Subject_CombinationView()
+               {
+                   FirstChoice = l.sirstsubid,
+                   subjectname = l.firstsub,
+                   StreamID = l.strid,
                  //FatherName = l.FatherName,
                  //Address = l.Address,
                  //ContactNo = l.ContactNo,
-                 stream=l.streamnam,
-                 SecondSubject = string.Join(", ", l.courseName.ToArray())
-             }).ToList();
+                 stream = l.streamnam,
+                   SecondSubject = string.Join(", ", l.courseName.ToArray())
+               }).ToList();
 
 
                 return R21;
@@ -266,7 +267,7 @@ namespace myAdmin.DB.DbOperations
         {
             using (var context = new SchoolDBEntities())
             {
-                var exist=context.Student_Master.Where(p => p.DHA_Id == dhaid).FirstOrDefault();
+                var exist = context.Student_Master.Where(p => p.DHA_Id == dhaid).FirstOrDefault();
                 if (exist != null)
                 {
                     return true;
@@ -313,7 +314,7 @@ namespace myAdmin.DB.DbOperations
                     return _model_Master.StudentID;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return 0;
             }
@@ -331,8 +332,8 @@ namespace myAdmin.DB.DbOperations
 
                 if (exist != null)
                 {
-                    
-                    if (exist.DOB==DOB&&exist.LastName==loginmodel.LastName)
+
+                    if (DateTime.Parse(exist.DOB).Date == DateTime.Parse(DOB).Date && exist.LastName == loginmodel.LastName)
                     {
                         var studentapplication = context.Application_Master.Where(p => p.StudentID == exist.StudentID).ToList();
                         if (studentapplication.Count > 0)
@@ -359,7 +360,7 @@ namespace myAdmin.DB.DbOperations
                         }
                         {
                             loginmodel.Sid = exist.StudentID;
-                            loginmodel.LastName = exist.FirstName +exist.LastName;
+                            loginmodel.LastName = exist.FirstName + exist.LastName;
                             return 1;
                         }
                     }
@@ -371,7 +372,7 @@ namespace myAdmin.DB.DbOperations
                 }
                 else
                 {
-                    
+
                     return 3;
                 }
             }
@@ -402,7 +403,7 @@ namespace myAdmin.DB.DbOperations
                 }
             }
         }
-        
+
         public int SubmitApplication(Application_Property model)
         {
             using (var context = new SchoolDBEntities())
@@ -410,14 +411,14 @@ namespace myAdmin.DB.DbOperations
                 Application_Master _App_Master = new Application_Master()
                 {
                     ApplicationId = model.ApplicationId,
-                    StreamId=model.StreamId,
+                    StreamId = model.StreamId,
                     FirstSubjectID = model.FirstSubjectID,
                     SecondSubjectID = model.SecondSubjectID,
                     CommunSubjecctId = model.CommunSubjecctId,
                     StudentID = model.StudentID,
-                    MarksAtHS=model.MarksAtHS,
+                    MarksAtHS = model.MarksAtHS,
                     ApplicationStatus = model.ApplicationStatus,
-                    LastUpdatedUTC=DateTime.UtcNow
+                    LastUpdatedUTC = DateTime.UtcNow
                 };
 
                 context.Application_Master.Add(_App_Master);
@@ -436,25 +437,27 @@ namespace myAdmin.DB.DbOperations
             using (var context = new SchoolDBEntities())
             {
                 var result = context.Application_Master.ToList().Select(p => new ApplicationViewModel
-                { ApplicationId = p.ApplicationId,
-                Status=p.ApplicationStatus,
-                HS_SubjectMarks=p.MarksAtHS,
-                StudentID=p.StudentID,
+                {
+                    ApplicationId = p.ApplicationId,
+                    Status = p.ApplicationStatus,
+                    HS_SubjectMarks = p.MarksAtHS,
+                    StudentID = p.StudentID,
                     student = context.Student_Master.Where(S => S.StudentID == p.StudentID).Select(x => new Student_Property
-                    { FirstName = x.FirstName ,
-                    LastName=x.LastName,
-                        DHA_Id =x.DHA_Id,
-                        DOB =x.DOB,
-                        FatherName=x.FatherName,
-                        percentageAtHS=x.percentageAtHS,
-                        MobileNo=x.MobileNo,
-                        email=x.email
+                    {
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        DHA_Id = x.DHA_Id,
+                        DOB = x.DOB,
+                        FatherName = x.FatherName,
+                        percentageAtHS = x.percentageAtHS,
+                        MobileNo = x.MobileNo,
+                        email = x.email
                     }
                     ).FirstOrDefault(),
-                    
+
                     streamList = context.Stream_Master.Where(S => S.Stream_ID == p.StreamId).Select(x => new Stream_MasterView { StreamName = x.StreamName }).FirstOrDefault(),
-                    SubjectList= context.Subject_Master.Where(S => S.Subject_ID == p.FirstSubjectID).Select(x => new Subject_MasterView { SubjectName = x.SubjectName,Subject_ID=x.Subject_ID }).FirstOrDefault(),
-                    CommunSubjectList= context.Subject_Master.Where(S => S.Subject_ID == p.CommunSubjecctId).Select(x => new Subject_MasterView { SubjectName = x.SubjectName, Subject_ID = x.Subject_ID }).FirstOrDefault(),
+                    SubjectList = context.Subject_Master.Where(S => S.Subject_ID == p.FirstSubjectID).Select(x => new Subject_MasterView { SubjectName = x.SubjectName, Subject_ID = x.Subject_ID }).FirstOrDefault(),
+                    CommunSubjectList = context.Subject_Master.Where(S => S.Subject_ID == p.CommunSubjecctId).Select(x => new Subject_MasterView { SubjectName = x.SubjectName, Subject_ID = x.Subject_ID }).FirstOrDefault(),
                     secondsubject = context.Subject_Master.Where(S => S.Subject_ID == p.SecondSubjectID).FirstOrDefault().SubjectName
                     //context.Stream_Master.Where(S => S.Stream_ID == p.StreamId).Select(x => new Stream_MasterView { StreamName = x.StreamName }).FirstOrDefault(),
 
@@ -466,16 +469,16 @@ namespace myAdmin.DB.DbOperations
 
             }
 
-        
+
 
         }
 
-        public bool CheckSubjectCominApplication(int streamid,int majorid)
+        public bool CheckSubjectCominApplication(int streamid, int majorid)
         {
             //return true if exist
             try
             {
-                using(var db= new SchoolDBEntities())
+                using (var db = new SchoolDBEntities())
                 {
                     var applicationcheck = db.Application_Master.Where(p => p.FirstSubjectID == majorid || p.SecondSubjectID == majorid).ToList();
                     if (applicationcheck.Count > 0)
@@ -488,7 +491,7 @@ namespace myAdmin.DB.DbOperations
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -504,7 +507,7 @@ namespace myAdmin.DB.DbOperations
                     db.Subject_Combination.RemoveRange(db.Subject_Combination.Where(p => p.StreamID == streamid && p.FirstChoice == majorid));
                     db.SaveChanges();
 
-                        
+
                 }
                 return true;
             }
@@ -526,17 +529,17 @@ namespace myAdmin.DB.DbOperations
                     Appmaster.ApplicationStatus = status;
                     Appmaster.LastUpdatedUTC = DateTime.UtcNow;
                     context.Application_Master.Add(Appmaster);
-                   
-                        context.Entry(Appmaster).State = EntityState.Modified;
-                   
+
+                    context.Entry(Appmaster).State = EntityState.Modified;
+
                     context.SaveChanges();
-                    
+
                 }
 
                 return true;
             }
-               
-            
+
+
             catch (Exception ex)
             {
                 return false;

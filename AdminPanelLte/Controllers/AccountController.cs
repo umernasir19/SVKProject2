@@ -27,14 +27,15 @@ namespace AdminPanelLte.Controllers
             if (ModelState.IsValid)
             {
                 int flag = CheckUser(objmodel);
-                if (flag==1)
+                if (flag == 1)
                 {
                     Cookies.WriteUserInCookie(objmodel);
+                    Session[Config.sessionNameForuserdata] = objmodel;
                     Session["UID"] = objmodel.UserID;
                     Session["Admin"] = true;// objmodel.Sid;
                     return RedirectToAction("Index", "Home");
                 }
-                else if(flag==2)
+                else if (flag == 2)
                 {
                     objmodel.Message = "Wrong Credentials";
                     return View("AdminLogin", objmodel);
@@ -66,13 +67,14 @@ namespace AdminPanelLte.Controllers
             if (ModelState.IsValid)
             {
                 var flag = CheckLogin(objmodel);
-                if (flag==1)
+                if (flag == 1)
                 {
                     Cookies.WriteStudentInCookie(objmodel);
+                    Session[Config.sessionNameForStudentdata] = objmodel;
                     Session["UID"] = objmodel.Sid;
                     Session["Student"] = true;// objmodel.Sid;
                     Session["SName"] = objmodel.LastName;
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else if (flag == 2)
                 {
@@ -82,9 +84,9 @@ namespace AdminPanelLte.Controllers
                 else
                 {
                     objmodel.Message = "No record Exist";
-                    return View("Login",objmodel);
+                    return View("Login", objmodel);
                 }
-           
+
 
             }
             else
@@ -95,10 +97,10 @@ namespace AdminPanelLte.Controllers
 
         public int CheckLogin(Login_Property loginmodel)
         {
-           
+
 
             repository = new DbRepository();
-           return repository.LoginExist(loginmodel);
+            return repository.LoginExist(loginmodel);
         }
 
         public int CheckUser(User_Property usermodel)

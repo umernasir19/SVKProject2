@@ -17,6 +17,7 @@ namespace AdminPanelLte.Controllers
         DbRepository db;
         public ActionResult Application()
         {
+          
             Application_Property objappmodel = new Application_Property();
             db = new DbRepository();
             objappmodel.streamList = db.GetStream().Where(p => p.IsActive == true).Select(x => new Stream_MasterView { StreamName = x.StreamName, Stream_ID = x.Stream_ID }).ToList();

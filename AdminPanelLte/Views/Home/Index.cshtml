@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MyAdmin.Models.ApplicationViewModel>
+@using AdminPanelLte.Utilities
 @using AdminPanelLte.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +12,7 @@
 
     <div class="container-fluid">
         @{
-            if (Session["Student"] != null && Session["Student"].ToString() != null)
+            if (Session[Config.sessionNameForStudentdata] != null && Session[Config.sessionNameForStudentdata].ToString() != null)
             {
                <p>Dashboard</p>
             }

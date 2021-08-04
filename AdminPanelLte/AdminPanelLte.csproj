@@ -4366,7 +4366,6 @@
     <Content Include="Content\.npmignore" />
     <Content Include="Content\.stylelintignore" />
     <Content Include="Content\.stylelintrc" />
-    <Content Include="Content\.vscode\launch.json" />
     <Content Include="Content\build\config\.eslintrc.json" />
     <Content Include="Content\build\npm\.eslintrc.json" />
     <Content Include="Content\build\scss\adminlte.scss" />
@@ -4640,7 +4639,6 @@
     <Content Include="Mycontent\.npmignore" />
     <Content Include="Mycontent\.stylelintignore" />
     <Content Include="Mycontent\.stylelintrc" />
-    <Content Include="Mycontent\.vscode\launch.json" />
     <Content Include="Mycontent\build\config\.eslintrc.json" />
     <Content Include="Mycontent\build\npm\.eslintrc.json" />
     <Content Include="Mycontent\build\scss\adminlte.scss" />
@@ -4930,8 +4928,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\.vscode\" />
     <Folder Include="Image\" />
     <Folder Include="Models\" />
+    <Folder Include="Mycontent\.vscode\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
